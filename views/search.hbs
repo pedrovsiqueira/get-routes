@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+</head>
+
+<body>
+        {{#if queryString}}
+            <p>input: {{queryString}}
+        {{/if}}
+    </p>
+    <form action="/search">
+        <label for="search">search for:</label>
+        <input type="text" name="q">
+        <button type="submit">Go</button>
+    </form>
+</body>
+
+</html>

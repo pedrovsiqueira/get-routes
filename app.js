@@ -7,6 +7,21 @@ const hbs = require( 'hbs' )
 app.set( 'views', path.join( __dirname, 'views' ) );
 app.set( 'view engine', 'hbs' );
 
+app.get( '/user/:username', ( req, res ) => {
+    const name = req.params.username
+    res.render( 'index', {
+        name
+    } )
+} )
+
+app.get( '/search', ( req, res ) => {
+    const queryString = req.query.q
+
+    res.render( 'search', {
+        queryString
+    } )
+} )
+
 app.get( '/band/:bandId/stage/:stageId', ( req, res ) => {
     const bands = {
         1: 'Nirvana',
@@ -21,7 +36,7 @@ app.get( '/band/:bandId/stage/:stageId', ( req, res ) => {
     }
 
     const {
-        bandId, 
+        bandId,
         stageId
     } = req.params
 
@@ -47,7 +62,7 @@ app.get( '/bandqs', ( req, res ) => {
     }
 
     const {
-        bandId, 
+        bandId,
         stageId
     } = req.query
 
