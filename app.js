@@ -3,15 +3,40 @@ const express = require( 'express' )
 const app = express()
 const path = require( 'path' )
 const hbs = require( 'hbs' )
+const bodyParser = require( 'body-parser' )
+
+//body parser config
+app.use( bodyParser.urlencoded( {
+    extended: true
+} ) );
 
 app.set( 'views', path.join( __dirname, 'views' ) );
 app.set( 'view engine', 'hbs' );
 
-app.get( '/user/:username', ( req, res ) => {
-    const name = req.params.username
-    res.render( 'index', {
-        name
-    } )
+//login get route
+app.get( '/login', ( req, res ) => {
+    res.render( 'login' )
+} )
+
+//login post route
+app.post( '/login', ( req, res ) => {
+    const {
+        username,
+        password
+    } = req.body
+
+    const access = 'abc123'
+
+    if ( password === access ) {
+        res.render( 'dashboard', {
+            username
+        } )
+    } else {
+        const errorMsg = 'incorrect password'
+        res.render( 'login', {
+            errorMsg
+        } )
+    }
 } )
 
 app.get( '/search', ( req, res ) => {
